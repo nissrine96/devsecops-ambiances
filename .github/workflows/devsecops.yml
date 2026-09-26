@@ -10,10 +10,29 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
+
+      # 1. Checkout - جلب الكود من GitHub
       - name: Checkout source code
         uses: actions/checkout@v4
 
+      # 2. Setup Environment - تجهيز Node.js
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
           node-version: 20
+
+      # 3. Run Tests - اختبار الملفات الأساسية
+      - name: Run Tests
+        run: |
+          echo "Starting tests..."
+
+          test -f index.html
+          echo "index.html exists"
+
+          test -f style.css
+          echo "style.css exists"
+
+          test -f script.js
+          echo "script.js exists"
+
+          echo "All tests passed successfully!"
