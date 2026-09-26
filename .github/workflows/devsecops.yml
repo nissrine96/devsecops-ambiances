@@ -36,7 +36,9 @@ jobs:
           echo "script.js exists"
 
           echo "All tests passed successfully!"
-                - name: SAST - Semgrep
+
+      # 4. SAST - فحص أمني للكود باستعمال Semgrep
+      - name: SAST - Semgrep
         uses: semgrep/semgrep-action@v1
         with:
           config: p/javascript
