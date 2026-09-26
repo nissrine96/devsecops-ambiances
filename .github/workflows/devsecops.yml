@@ -13,5 +13,7 @@ jobs:
       - name: Checkout source code
         uses: actions/checkout@v4
 
-      - name: Test Pipeline
-        run: echo "DevSecOps Pipeline fonctionne !"
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
