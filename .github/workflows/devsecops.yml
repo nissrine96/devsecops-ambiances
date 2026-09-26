@@ -1,0 +1,14 @@
+name: DevSecOps Pipeline
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  test-pipeline:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Test Pipeline
+        run: echo "DevSecOps Pipeline fonctionne !"
