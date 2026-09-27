@@ -15,13 +15,18 @@ jobs:
       - name: Checkout source code
         uses: actions/checkout@v4
 
-      # 2. Setup Environment - تجهيز Node.js
+      # 2. Setup Node.js - تجهيز بيئة Node.js
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: 20
+          node-version: 24
+          cache: npm
 
-      # 3. Run Tests - اختبار الملفات الأساسية
+      # 3. Install dependencies - تثبيت مكتبات المشروع
+      - name: Install dependencies
+        run: npm ci
+
+      # 4. Run Tests - اختبار الملفات الأساسية
       - name: Run Tests
         run: |
           echo "Starting tests..."
@@ -37,8 +42,15 @@ jobs:
 
           echo "All tests passed successfully!"
 
-      # 4. SAST - فحص أمني للكود باستعمال Semgrep
+      # 5. SAST - فحص أمني للكود باستعمال Semgrep
       - name: SAST - Semgrep
         uses: semgrep/semgrep-action@v1
         with:
           config: p/javascript
+
+      # 6. SCA - فحص dependencies باستعمال npm audit
+      - name: SCA - npm Audit
+        run: |
+          echo "Starting Software Composition Analysis..."
+          npm audit --audit-level=high
+          echo "SCA completed successfully!"
